@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SmoothieCity.Models.Smoothies>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+<center>
+    <div>
+        @foreach (var item in Model)
+        {
+
+
+            <div style='float:left; padding-bottom:64px;  padding-left:32px; padding-right:32px;'>
+
+                @{
+                    String iname = item.SmoothieName;
+                    String icals = item.SmoothieCalories.ToString();
+                    String isrc = item.SmoothieImage;
+                    String iing = item.SmoothieIngredients;
+                    String price = String.Format("{0:F2}", (double)item.SmoothiePrice);
+                }
+                <h3>@iname - <i><h5>@icals Calories</h5></i></h3><p><i>@iing</i></p>
+                <p><img src=@isrc width="300" height="320" /></p>
+                <p>$@price</p>
+
+                <a asp-action="Edit" asp-route-id="@item.SmoothieId">Order!</a> |
+                <a asp-action="Details" asp-route-id="@item.SmoothieId">Details?</a>
+
+
+            </div>
+
+        }
+    </div>
+</center>
