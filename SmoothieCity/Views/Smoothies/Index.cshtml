@@ -28,7 +28,7 @@
                     String price = String.Format("{0:F2}", (double)item.SmoothiePrice);
                 }
                 <h3>@iname - <i><h5>@icals Calories</h5></i></h3><p><i>@iing</i></p>
-                <p><img src=@isrc width="300" height="320" /></p>
+                <p><img src=~/@isrc width="300" height="320" /></p>
                 <p>$@price</p>
 
                 <a asp-action="Edit" asp-route-id="@item.SmoothieId">Order!</a> |
