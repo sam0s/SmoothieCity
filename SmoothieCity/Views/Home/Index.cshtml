@@ -11,9 +11,9 @@
     {
         <h1 class="display-4;">Welcome to Smoothie City @User.Identity.Name!</h1>
         <p>The one and only service to provide you with the smoothie you deserve.</p>
-        <a style='margin:16px;' class="btn btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account Settings</a>
+        <a style='margin:16px;' class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account Settings</a>
         <form class="form-group" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button type="submit" class="btn btn-primary">Log out</button>
+            <button type="submit" class="btn btn-secondary">Log out</button>
         </form>
 
     }
@@ -21,9 +21,9 @@
     {
         <h1 class="display-4">Welcome to Smoothie City baby</h1>
         <p>The one and only service to provide you with the smoothie you deserve.</p>
-        <a style='margin:16px;' class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a style='margin:16px;' class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Register">Register</a>
         <div>
-            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <a class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Login">Login</a>
         </div>
     }
 </div>

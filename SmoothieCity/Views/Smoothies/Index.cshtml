@@ -2,10 +2,10 @@
 
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Manage Menu";
 }
 
-<h1>Index</h1>
+<h1>Manage Menu</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -31,8 +31,8 @@
                 <p><img src=~/@isrc width="300" height="320" /></p>
                 <p>$@price</p>
 
-                <a asp-action="Edit" asp-route-id="@item.SmoothieId">Order!</a> |
-                <a asp-action="Details" asp-route-id="@item.SmoothieId">Details?</a>
+                <a class="btn btn-secondary", asp-action="Edit" asp-route-id="@item.SmoothieId">Edit</a> |
+                <a class="btn btn-secondary", asp-action="Details" asp-route-id="@item.SmoothieId">Details?</a>
 
 
             </div>

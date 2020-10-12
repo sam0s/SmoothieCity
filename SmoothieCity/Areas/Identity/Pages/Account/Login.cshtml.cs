@@ -45,6 +45,7 @@ namespace SmoothieCity.Areas.Identity.Pages.Account
         {
             [Required]
             [DataType(DataType.Text)]
+            [Display(Name ="Username")]
             public string Usr { get; set; }
 
             [Required]

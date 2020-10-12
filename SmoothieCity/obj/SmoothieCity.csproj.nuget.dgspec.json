@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sam Tubb\\source\\repos\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj": {}
+    "C:\\Users\\starg\\OneDrive\\Desktop\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sam Tubb\\source\\repos\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj": {
+    "C:\\Users\\starg\\OneDrive\\Desktop\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sam Tubb\\source\\repos\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj",
+        "projectUniqueName": "C:\\Users\\starg\\OneDrive\\Desktop\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj",
         "projectName": "SmoothieCity",
-        "projectPath": "C:\\Users\\Sam Tubb\\source\\repos\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj",
-        "packagesPath": "C:\\Users\\Sam Tubb\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sam Tubb\\source\\repos\\SmoothieCity\\SmoothieCity\\obj\\",
+        "projectPath": "C:\\Users\\starg\\OneDrive\\Desktop\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj",
+        "packagesPath": "C:\\Users\\starg\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\starg\\OneDrive\\Desktop\\SmoothieCity\\SmoothieCity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Sam Tubb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\starg\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -95,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
