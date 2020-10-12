@@ -5,12 +5,13 @@ namespace SmoothieCity.Models
 {
     public partial class AspNetRoles
     {
-       /* public enum Roles
+        public enum Roles
         {
             Manager,
             Employee,
             Customer
-        }*/
+        }
+
         public AspNetRoles()
         {
             AspNetRoleClaims = new HashSet<AspNetRoleClaims>();

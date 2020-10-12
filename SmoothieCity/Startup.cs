@@ -36,6 +36,7 @@ namespace SmoothieCity
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
+                //.AddRoles<IdentityRole>();
             services.AddScoped<SignInManager<ApplicationUser>, SignInManager<ApplicationUser>>();
             services.AddControllersWithViews();
             services.AddRazorPages();
