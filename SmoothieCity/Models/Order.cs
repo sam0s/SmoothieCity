@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
 
 namespace SmoothieCity.Models
 {
-    public class Order
+    public partial class Order
     {
+        public Order()
+        {
+
+        }
 
         [Display(Name = "Order ID")]
         public int OrderID { get; set; }

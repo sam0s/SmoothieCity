@@ -25,15 +25,6 @@ namespace SmoothieCity.Models
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Smoothies> Smoothies { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=BUCKY\\SQLEXPRESS;Initial Catalog=SmoothieCity;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AspNetRoleClaims>(entity =>
@@ -158,6 +149,9 @@ namespace SmoothieCity.Models
 
         public DbSet<SmoothieCity.Models.Order> Order { get; set; }
 
+        public DbSet<SmoothieCity.Models.OrderItems> OrderItems { get; set; }
+
         public DbSet<SmoothieCity.Models.Customer> Customer { get; set; }
+
     }
 }

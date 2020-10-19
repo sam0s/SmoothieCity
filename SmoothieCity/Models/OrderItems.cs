@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
 
 namespace SmoothieCity.Models
 {
-    public class OrderItems
+    public partial class OrderItems
     {
         [Display(Name = "Order Item ID")]
-        public int OrderItemID { get; set; }
+        public int OrderItemsID { get; set; }
 
         public int OrderID { get; set; }
         public int SmoothieID { get; set; }
