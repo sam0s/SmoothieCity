@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using SmoothieCity.Models;
 
 namespace SmoothieCity.Models
 {
@@ -146,11 +147,17 @@ namespace SmoothieCity.Models
                 entity.Property(e => e.SmoothieImage).HasColumnType("text");
 
                 entity.Property(e => e.SmoothieName).HasColumnType("text");
+
+                //entity.Property(e => e.SmoothieIngredients).HasColumnType("text");
             });
 
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<SmoothieCity.Models.Order> Order { get; set; }
+
+        public DbSet<SmoothieCity.Models.Customer> Customer { get; set; }
     }
 }
