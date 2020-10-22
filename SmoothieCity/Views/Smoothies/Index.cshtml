@@ -18,24 +18,25 @@
         {
 
 
-            <div style='float:left; padding-bottom:64px;  padding-left:32px; padding-right:32px;'>
+        <div style='float:left; padding-bottom:64px;  padding-left:32px; padding-right:32px;'>
 
-                @{
-                    String iname = item.SmoothieName;
-                    String icals = item.SmoothieCalories.ToString();
-                    String isrc = item.SmoothieImage;
-                    String iing = item.SmoothieIngredients;
-                    String price = String.Format("{0:F2}", (double)item.SmoothiePrice);
-                }
-                <h3>@iname - <i><h5>@icals Calories</h5></i></h3><p><i>@iing</i></p>
-                <p><img src=~/@isrc width="300" height="320" /></p>
-                <p>$@price</p>
+            @{
+                String iname = item.SmoothieName;
+                String icals = item.SmoothieCalories.ToString();
+                String isrc = item.SmoothieImage;
+                String iing = item.SmoothieIngredients;
+                String price = String.Format("{0:F2}", (double)item.SmoothiePrice);
+            }
+            <h3>@iname - <i><h5>@icals Calories</h5></i></h3><p><i>@iing</i></p>
+            <p><img src=~/@isrc width="300" height="320" /></p>
+            <p>$@price</p>
 
-                <a class="btn btn-secondary", asp-action="Edit" asp-route-id="@item.SmoothieId">Edit</a> |
-                <a class="btn btn-secondary", asp-action="Details" asp-route-id="@item.SmoothieId">Details?</a>
+            <a class="btn btn-secondary" , asp-action="Edit" asp-route-id="@item.SmoothieId">Edit</a> |
+            <a class="btn btn-secondary" , asp-action="Details" asp-route-id="@item.SmoothieId">Details</a> |
+            <a class="btn btn-secondary" , asp-action="delete" asp-route-id="@item.SmoothieId">Delete</a>
 
 
-            </div>
+        </div>
 
         }
     </div>
