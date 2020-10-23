@@ -15,13 +15,13 @@ namespace SmoothieCity
 {
     public class Program
     {
-        public static void Main(string[] args)
+        /*public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-        }
+        }*/
 
 
-       /* public async static Task Main(string[] args)
+        public async static Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
@@ -34,6 +34,7 @@ namespace SmoothieCity
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     await ContextSeed.SeedRolesAsync(userManager, roleManager);
+                    await ContextSeed.SeedSuperAdminAsync(userManager, roleManager);
                 }
                 catch (Exception ex)
                 {
@@ -42,7 +43,7 @@ namespace SmoothieCity
                 }
             }
             host.Run();
-        }*/
+        }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

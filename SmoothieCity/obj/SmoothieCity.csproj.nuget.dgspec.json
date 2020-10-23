@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nataliyavykhovanets/Desktop/project/SmoothieCity/SmoothieCity/SmoothieCity.csproj": {}
+    "C:\\Users\\starg\\OneDrive\\Desktop\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj": {}
   },
   "projects": {
-    "/Users/nataliyavykhovanets/Desktop/project/SmoothieCity/SmoothieCity/SmoothieCity.csproj": {
+    "C:\\Users\\starg\\OneDrive\\Desktop\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nataliyavykhovanets/Desktop/project/SmoothieCity/SmoothieCity/SmoothieCity.csproj",
+        "projectUniqueName": "C:\\Users\\starg\\OneDrive\\Desktop\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj",
         "projectName": "SmoothieCity",
-        "projectPath": "/Users/nataliyavykhovanets/Desktop/project/SmoothieCity/SmoothieCity/SmoothieCity.csproj",
-        "packagesPath": "/Users/nataliyavykhovanets/.nuget/packages/",
-        "outputPath": "/Users/nataliyavykhovanets/Desktop/project/SmoothieCity/SmoothieCity/obj/",
+        "projectPath": "C:\\Users\\starg\\OneDrive\\Desktop\\SmoothieCity\\SmoothieCity\\SmoothieCity.csproj",
+        "packagesPath": "C:\\Users\\starg\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\starg\\OneDrive\\Desktop\\SmoothieCity\\SmoothieCity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/nataliyavykhovanets/.config/NuGet/NuGet.Config"
+          "C:\\Users\\starg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -93,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
