@@ -25,6 +25,8 @@ namespace SmoothieCity.Controllers
             }
             public async Task<IActionResult> Index()
             {
+            if (User.IsInRole("Manager"))
+            {
                 var users = await _userManager.Users.ToListAsync();
                 var userRolesViewModel = new List<Models.UserRolesViewModel>();
                 foreach (ApplicationUser user in users)
@@ -39,6 +41,8 @@ namespace SmoothieCity.Controllers
                 }
                 return View(userRolesViewModel);
             }
+            return View("~/Views/RoleManager/AcessDenied.cshtml");
+        }
 
             private async Task<List<string>> GetUserRoles(ApplicationUser user)
             {

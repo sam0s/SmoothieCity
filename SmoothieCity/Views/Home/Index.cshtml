@@ -6,32 +6,37 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-    <div class="text-center">
-        @if (SignInManager.IsSignedIn(User))
+<div class="text-center">
+    @if (SignInManager.IsSignedIn(User))
+    {
+
+        <h1 class="display-4;">Welcome to Smoothie City @User.Identity.Name!</h1>
+        <p>The one and only service to provide you with the smoothie you deserve.</p>
+
+        <p style="text-align:center"><img src="https://www.gentlemansgazette.com/wp-content/uploads/2015/05/Delicious-fruit-smoothies.jpg" width="700" height="400" /></p>
+
+        @if (User.IsInRole("Manager"))
         {
-            if(UserManager.is)
-            <h1 class="display-4;">Welcome to Smoothie City @User.Identity.Name!</h1>
-            <p>The one and only service to provide you with the smoothie you deserve.</p>
-
-            <p style="text-align:center"><img src="https://www.gentlemansgazette.com/wp-content/uploads/2015/05/Delicious-fruit-smoothies.jpg" width="700" height="400" /></p>
-
-            <a style='margin:16px;' class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account Settings</a>
-            <form class="form-group" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="btn btn-secondary">Log out</button>
-            </form>
-
+            <a style='margin:16px;' class="btn btn-secondary" asp-controller="UserRoles" asp-action="Index" title="Manage">Manage Users</a>
         }
-        else
-        {
-            <h1 class="display-4">Welcome to Smoothie City baby</h1>
-            <p>The one and only service to provide you with the smoothie you deserve.</p>
 
-            <p style="text-align:center"><img src="https://www.gentlemansgazette.com/wp-content/uploads/2015/05/Delicious-fruit-smoothies.jpg" width="700" height="400"/></p>
+        <a style='margin:16px;' class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account Settings</a>
+        <form class="form-group" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="btn btn-secondary">Log out</button>
+        </form>
+
+    }
+    else
+    {
+        <h1 class="display-4">Welcome to Smoothie City baby</h1>
+        <p>The one and only service to provide you with the smoothie you deserve.</p>
+
+        <p style="text-align:center"><img src="https://www.gentlemansgazette.com/wp-content/uploads/2015/05/Delicious-fruit-smoothies.jpg" width="700" height="400" /></p>
 
 
-            <a style='margin:16px;' class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Register">Register</a>
-            <div>
-                <a class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Login">Login</a>
-            </div>
-        }
-    </div>
+        <a style='margin:16px;' class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <div>
+            <a class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </div>
+    }
+</div>

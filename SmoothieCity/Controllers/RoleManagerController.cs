@@ -17,17 +17,27 @@ namespace SmoothieCity.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var roles = await _roleManager.Roles.ToListAsync();
-            return View(roles);
+            if (User.IsInRole("Manager"))
+            {
+                var roles = await _roleManager.Roles.ToListAsync();
+                return View(roles);
+            }
+            return View("~/Views/RoleManager/AcessDenied.cshtml");
+
         }
+
         [HttpPost]
         public async Task<IActionResult> AddRole(string roleName)
         {
-            if (roleName != null)
+            if (User.IsInRole("Manager"))
             {
-                await _roleManager.CreateAsync(new IdentityRole(roleName.Trim()));
+                if (roleName != null)
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(roleName.Trim()));
+                }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View("~/Views/RoleManager/AcessDenied.cshtml");
         }
     }
 }
