@@ -3,3 +3,4 @@ SmoothieCity/appsettings.json
 SmoothieCity/bin/
 SmoothieCity/Properties/
 .DS_Store
+SmoothieCity/obj/
