@@ -1,11 +1,6 @@
 C:\Users\Sam Tubb\source\repos\SmoothieCity\SmoothieCity\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\Sam Tubb\source\repos\SmoothieCity\SmoothieCity\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\Sam Tubb\source\repos\SmoothieCity\SmoothieCity\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
-C:\Users\Sam Tubb\source\repos\SmoothieCity\SmoothieCity\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.json
-C:\Users\Sam Tubb\source\repos\SmoothieCity\SmoothieCity\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.local.json
-C:\Users\Sam Tubb\source\repos\SmoothieCity\SmoothieCity\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.SmoothieCity - Web Deploy.json
-C:\Users\Sam Tubb\source\repos\SmoothieCity\SmoothieCity\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\SmoothieCity - Web Deploy\mssql1.arm.json
-C:\Users\Sam Tubb\source\repos\SmoothieCity\SmoothieCity\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\SmoothieCity - Web Deploy\profile.arm.json
 C:\Users\Sam Tubb\source\repos\SmoothieCity\SmoothieCity\bin\Debug\netcoreapp3.1\SmoothieCity.StaticWebAssets.xml
 C:\Users\Sam Tubb\source\repos\SmoothieCity\SmoothieCity\bin\Debug\netcoreapp3.1\SmoothieCity.exe
 C:\Users\Sam Tubb\source\repos\SmoothieCity\SmoothieCity\bin\Debug\netcoreapp3.1\SmoothieCity.deps.json

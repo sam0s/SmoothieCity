@@ -11,38 +11,49 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SmoothieCity.Models;
 
+
+
 namespace SmoothieCity.ViewComponents
 {
     public class MenuController : ViewComponent
     {
 
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly String _dbCon;
 
-        public MenuController(IConfiguration configuration, UserManager<ApplicationUser> userManager)
+        private readonly SmoothieCityContext _context;
+
+        public MenuController(SmoothieCityContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
-            _dbCon = configuration.GetConnectionString("DefaultConnection");
+            _context = context;
+            _signInManager = signInManager;
             _userManager = userManager;
+            _dbCon = configuration.GetConnectionString("DefaultConnection");
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-
-            var usr = await _userManager.FindByNameAsync(User.Identity.Name);
-            List<int> cartItems = new List<int>();
-
-            //this finds total items in cart. Might be a better way to do this still.
             int total = 0;
-            using (var con = new SqlConnection(_dbCon))
+            
+            if (_signInManager.IsSignedIn((System.Security.Claims.ClaimsPrincipal)User))
             {
-                con.Open();
-                SqlCommand test = new SqlCommand("SELECT TOP 500 [dbo].OrderItems.SmoothieID, [dbo].[Order].CustomerID FROM[dbo].OrderItems INNER JOIN[dbo].[Order] ON[dbo].[OrderItems].[OrderID] = [dbo].[Order].[OrderID] WHERE[dbo].[Order].[CustomerID] = '" + usr.Id + "'", con);
-                
-                using (SqlDataReader reader = test.ExecuteReader())
+                var usr = await _userManager.FindByNameAsync(User.Identity.Name);
+                List<int> cartItems = new List<int>();
+
+                //this finds total items in cart. Might be a better way to do this still.
+
+                using (var con = new SqlConnection(_dbCon))
                 {
-                    while (reader.Read())
+                    con.Open();
+                    SqlCommand test = new SqlCommand("SELECT TOP 500 [dbo].OrderItems.SmoothieID, [dbo].[Order].CustomerID FROM[dbo].OrderItems INNER JOIN[dbo].[Order] ON[dbo].[OrderItems].[OrderID] = [dbo].[Order].[OrderID] WHERE[dbo].[Order].[CustomerID] = '" + usr.Id + "'", con);
+
+                    using (SqlDataReader reader = test.ExecuteReader())
                     {
-                        total++;
+                        while (reader.Read())
+                        {
+                            total++;
+                        }
                     }
                 }
             }

@@ -1,3 +1,5 @@
 SmoothieCity/appsettings.json
 .vs/
 SmoothieCity/bin/
+SmoothieCity/Properties/
+.DS_Store
