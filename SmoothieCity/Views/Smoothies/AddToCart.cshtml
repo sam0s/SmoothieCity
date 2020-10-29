@@ -1,0 +1,32 @@
+﻿@model SmoothieCity.Models.ViewModel;
+@{
+
+    ViewData["Title"] = "Item Added";
+    var sid = @ViewBag.addedId;
+    Smoothies smooth = null;
+    foreach (Smoothies var in Model.Smoothies)
+    {
+        if (var.SmoothieId.Equals(sid))
+        {
+            smooth = var;
+        }
+    }
+
+}
+
+<h1>Item Added</h1>
+
+<div>
+    <a asp-area="" asp-controller="Smoothies" asp-action="Index">Back to List</a>
+</div>
+
+
+<center>
+    @{if (smooth != null)
+        {
+            <p>Thank you for adding @smooth.SmoothieName</p>
+        }
+    }
+
+
+</center>

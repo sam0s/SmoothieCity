@@ -151,7 +151,7 @@ namespace SmoothieCity.Models
 
         public DbSet<SmoothieCity.Models.OrderItems> OrderItems { get; set; }
 
-        public DbSet<SmoothieCity.Models.Customer> Customer { get; set; }
+        public DbSet<SmoothieCity.Models.AspNetUsers> Customer { get; set; }
 
     }
 }

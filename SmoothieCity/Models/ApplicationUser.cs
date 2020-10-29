@@ -10,6 +10,10 @@ namespace SmoothieCity.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        
+
+        public static implicit operator Task<object>(ApplicationUser v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

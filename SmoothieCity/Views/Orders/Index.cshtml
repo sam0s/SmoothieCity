@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.PickUpTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer.CustomerID)
+                @Html.DisplayFor(modelItem => item.Customer.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |

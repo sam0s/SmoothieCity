@@ -16,6 +16,5 @@ namespace SmoothieCity.Models
 
         // foreign keys
         public virtual Order Order { get; set; }
-        public virtual Smoothies Smoothies { get; set; }
     }
 }

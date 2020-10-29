@@ -19,17 +19,17 @@ namespace SmoothieCity.Models
         public string SpecialInstructions { get; set; }
 
         [Display(Name = "Order Time")]
-        [DataType(DataType.Date)]
-        public DateTime OrderTime { get; set; }
+        [DataType(DataType.Text)]
+        public String OrderTime { get; set; }
 
         [Display( Name = "Pick-up Time")]
-        [DataType(DataType.Date)]
-        public DateTime PickUpTime { get; set; }
+        [DataType(DataType.Text)]
+        public String PickUpTime { get; set; }
 
-        public int CustomerID { get; set; }
+        public String CustomerID { get; set; }
 
         //foreign key to customer
-        public virtual Customer Customer { get; set; }
+        public virtual AspNetUsers Customer { get; set; }
 
     }
 }

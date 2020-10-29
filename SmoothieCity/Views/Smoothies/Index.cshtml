@@ -1,43 +1,108 @@
-﻿@model IEnumerable<SmoothieCity.Models.Smoothies>
-
+﻿
+@model IEnumerable<SmoothieCity.Models.Smoothies>
 
 @{
     ViewData["Title"] = "Manage Menu";
 }
 
-<h1>Manage Menu</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
+<style>
+    .smoothie_img {
+        width: 300px;
+        height: 320px;
+        border-radius: 8px;
+    }
+
+    /* relevant styles */
+    .img__wrap {
+        position: relative;
+        height: 320px;
+        width: 300px;
+    }
+
+        .img__wrap:hover .img__description {
+            transform: translateY(0);
+        }
+
+        .img__wrap:hover .img__description_layer {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    .img__description {
+        transition: .2s;
+        transform: translateY(1em);
+    }
+
+    span {
+        display: block;
+    }
+
+    .img__description_layer {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(79, 184, 249, 0.4);
+        color: #000000;
+        visibility: hidden;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity .2s, visibility .2s;
+        border-radius: 8px;
+    }
+</style>
+
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> signInManager;
+@if (signInManager.IsSignedIn(User) && User.IsInRole("Manager"))
+{
+    <h1>Manage Menu</h1>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+else
+{
+    <h1>Our Smoothies</h1>
+}
 
 <center>
     <div>
+
+
         @foreach (var item in Model)
         {
 
 
-        <div style='float:left; padding-bottom:64px;  padding-left:32px; padding-right:32px;'>
+            <div style='float:left; padding-bottom:64px;  padding-left:32px; padding-right:32px;'>
 
-            @{
-                String iname = item.SmoothieName;
-                String icals = item.SmoothieCalories.ToString();
-                String isrc = item.SmoothieImage;
-                String iing = item.SmoothieIngredients;
-                String price = String.Format("{0:F2}", (double)item.SmoothiePrice);
-            }
-            <h3>@iname - <i><h5>@icals Calories</h5></i></h3><p><i>@iing</i></p>
-            <p><img src=~/@isrc width="300" height="320" /></p>
-            <p>$@price</p>
+                @{
+                    String iname = item.SmoothieName;
+                    String icals = item.SmoothieCalories.ToString();
+                    String isrc = item.SmoothieImage;
+                    String iing = item.SmoothieIngredients;
+                    String price = String.Format("{0:F2}", (double)item.SmoothiePrice);
+                }
+                <h3 style="padding-bottom:0px">@iname</h3>
+                <p style="padding-top:0px"><i>@icals Calories</i></p>
+                <p><i>@iing</i></p>
 
-            <a class="btn btn-secondary" , asp-action="Edit" asp-route-id="@item.SmoothieId">Edit</a> |
-            <a class="btn btn-secondary" , asp-action="Details" asp-route-id="@item.SmoothieId">Details</a> |
-            <a class="btn btn-secondary" , asp-action="delete" asp-route-id="@item.SmoothieId">Delete</a>
+                <a href="@Url.Action("AddToCart", "Smoothies", new { smoothieId = item.SmoothieId })" title="Edit">
+                    <span class="img__wrap">
+                        <img src=~/@isrc class=smoothie_img />
+                        <span class="img__description_layer">
+                            <b class="img__description">Add to Order</b>
+                        </span>
+                    </span>
+                </a>
+                <p>$@price</p>
 
 
-        </div>
-
+            </div>
         }
     </div>
 </center>

@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmoothieCity.Models
 {
-    public partial class CartItem
+    public class CartItem
     {
-        int id;
-        public CartItem(Smoothies obj)
+        public Smoothies Smooth { get; set; }
+        public int count { get; set; }
+        public CartItem(Smoothies smoothies, int count)
         {
-            id = obj.SmoothieId;
+            Smooth = smoothies;
+            this.count = count;
         }
 
-
-
+      
     }
 }
