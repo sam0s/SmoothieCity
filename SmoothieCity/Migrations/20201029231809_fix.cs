@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SmoothieCity.Migrations
 {
-    public partial class i : Migration
+    public partial class fix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -199,8 +199,7 @@ namespace SmoothieCity.Migrations
                     OrderItemsID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderID = table.Column<int>(nullable: false),
-                    SmoothieID = table.Column<int>(nullable: false),
-                    SmoothiesSmoothieId = table.Column<int>(nullable: true)
+                    SmoothieID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -211,12 +210,6 @@ namespace SmoothieCity.Migrations
                         principalTable: "Order",
                         principalColumn: "OrderID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderItems_Smoothies_SmoothiesSmoothieId",
-                        column: x => x.SmoothiesSmoothieId,
-                        principalTable: "Smoothies",
-                        principalColumn: "SmoothieID",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -267,11 +260,6 @@ namespace SmoothieCity.Migrations
                 name: "IX_OrderItems_OrderID",
                 table: "OrderItems",
                 column: "OrderID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderItems_SmoothiesSmoothieId",
-                table: "OrderItems",
-                column: "SmoothiesSmoothieId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -295,13 +283,13 @@ namespace SmoothieCity.Migrations
                 name: "OrderItems");
 
             migrationBuilder.DropTable(
+                name: "Smoothies");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Order");
-
-            migrationBuilder.DropTable(
-                name: "Smoothies");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

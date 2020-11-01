@@ -10,8 +10,8 @@ using SmoothieCity.Models;
 namespace SmoothieCity.Migrations
 {
     [DbContext(typeof(SmoothieCityContext))]
-    [Migration("20201029164812_i")]
-    partial class i
+    [Migration("20201029231809_fix")]
+    partial class fix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -264,14 +264,9 @@ namespace SmoothieCity.Migrations
                     b.Property<int>("SmoothieID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SmoothiesSmoothieId")
-                        .HasColumnType("int");
-
                     b.HasKey("OrderItemsID");
 
                     b.HasIndex("OrderID");
-
-                    b.HasIndex("SmoothiesSmoothieId");
 
                     b.ToTable("OrderItems");
                 });
@@ -368,10 +363,6 @@ namespace SmoothieCity.Migrations
                         .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("SmoothieCity.Models.Smoothies", "Smoothies")
-                        .WithMany()
-                        .HasForeignKey("SmoothiesSmoothieId");
                 });
 #pragma warning restore 612, 618
         }

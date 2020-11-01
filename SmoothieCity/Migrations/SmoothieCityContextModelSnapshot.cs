@@ -262,14 +262,9 @@ namespace SmoothieCity.Migrations
                     b.Property<int>("SmoothieID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SmoothiesSmoothieId")
-                        .HasColumnType("int");
-
                     b.HasKey("OrderItemsID");
 
                     b.HasIndex("OrderID");
-
-                    b.HasIndex("SmoothiesSmoothieId");
 
                     b.ToTable("OrderItems");
                 });
@@ -366,10 +361,6 @@ namespace SmoothieCity.Migrations
                         .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("SmoothieCity.Models.Smoothies", "Smoothies")
-                        .WithMany()
-                        .HasForeignKey("SmoothiesSmoothieId");
                 });
 #pragma warning restore 612, 618
         }
