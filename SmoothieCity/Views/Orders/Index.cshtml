@@ -1,53 +1,35 @@
-@model IEnumerable<SmoothieCity.Models.Order>
+﻿@model IEnumerable<SmoothieCity.Models.Order>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Manage Menu";
 }
 
-<h1>Index</h1>
+<center>
+    @foreach (var item in Model)
+    {
+        if (item.Submitted == true)
+        {
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SpecialInstructions)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PickUpTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Customer)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpecialInstructions)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PickUpTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div>
+
+        @{
+            String iname = item.Customer.FirstName + " " + item.Customer.LastName;
+            String isub_time = item.OrderTime;
+            String ipickup_time = item.PickUpTime;
+        }
+
+        <p>
+            <i>
+                @iname
+                @isub_time
+                @ipickup_time
+            </i>
+
+            <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
+        </p>
+
+    </div>
+
+        }
+    }
+</center>

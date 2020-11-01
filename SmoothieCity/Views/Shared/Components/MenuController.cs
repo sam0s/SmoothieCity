@@ -39,14 +39,13 @@ namespace SmoothieCity.ViewComponents
             if (_signInManager.IsSignedIn((System.Security.Claims.ClaimsPrincipal)User))
             {
                 var usr = await _userManager.FindByNameAsync(User.Identity.Name);
-                List<int> cartItems = new List<int>();
 
                 //this finds total items in cart. Might be a better way to do this still.
 
                 using (var con = new SqlConnection(_dbCon))
                 {
                     con.Open();
-                    SqlCommand test = new SqlCommand("SELECT TOP 500 [dbo].OrderItems.SmoothieID, [dbo].[Order].CustomerID FROM[dbo].OrderItems INNER JOIN[dbo].[Order] ON[dbo].[OrderItems].[OrderID] = [dbo].[Order].[OrderID] WHERE[dbo].[Order].[CustomerID] = '" + usr.Id + "'", con);
+                    SqlCommand test = new SqlCommand("SELECT TOP 500 [dbo].OrderItems.SmoothieID, [dbo].[Order].CustomerID FROM[dbo].OrderItems INNER JOIN[dbo].[Order] ON[dbo].[OrderItems].[OrderID] = [dbo].[Order].[OrderID] WHERE[dbo].[Order].[CustomerID] = '" + usr.Id + "' AND [dbo].[Order].[Submitted] = 0", con);
 
                     using (SqlDataReader reader = test.ExecuteReader())
                     {

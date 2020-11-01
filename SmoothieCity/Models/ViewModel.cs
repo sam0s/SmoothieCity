@@ -8,7 +8,8 @@ namespace SmoothieCity.Models
     public class ViewModel
     {
         public IEnumerable<SmoothieCity.Models.Smoothies> Smoothies { get; set; }
-        public SmoothieCity.Models.OrderItems OrderItems { get; set; }
+
+        public IEnumerable<SmoothieCity.Models.Order> Orders { get; set; }
     }
 
 }

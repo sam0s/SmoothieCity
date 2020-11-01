@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,17 +13,22 @@ namespace SmoothieCity.Controllers
     public class OrdersController : Controller
     {
         private readonly SmoothieCityContext _context;
-
-        public OrdersController(SmoothieCityContext context)
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public OrdersController(SmoothieCityContext context, SignInManager<ApplicationUser> signInManager)
         {
+            _signInManager = signInManager;
             _context = context;
         }
 
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var smoothieCityContext = _context.Order.Include(o => o.Customer);
-            return View(await smoothieCityContext.ToListAsync());
+            if (_signInManager.IsSignedIn(User) && User.IsInRole("Manager"))
+            {
+                var smoothieCityContext = _context.Order.Include(o => o.Customer);
+                return View(await smoothieCityContext.ToListAsync());
+            }
+            return View("~/Views/RoleManager/AcessDenied.cshtml");
         }
 
         // GET: Orders/Details/5

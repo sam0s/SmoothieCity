@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<SmoothieCity.Models.Smoothies>
+@model SmoothieCity.Models.ViewModel;
 @{
 
     ViewData["Title"] = "Cart";
@@ -20,7 +20,7 @@
             continue;
         }
 
-        foreach (Smoothies s in Model)
+        foreach (Smoothies s in Model.Smoothies)
         {
             if (s.SmoothieId.Equals(i))
             {
@@ -82,12 +82,14 @@
     </p>
 
 
-    <div>
-        <a asp-area="" asp-controller="Smoothies" asp-action="Index">Back to List</a>
-    </div>
+        <a href="@Url.Action("Finalize", "Smoothies" , new { id = ViewBag.orderId })" title="Add to Cart">Finalize Order</a>
+
+        <div>
+            <a asp-area="" asp-controller="Smoothies" asp-action="Index"> Back to List</a>
+        </div>
 
 
-    <center>
+        <center>
 
-    </center>
-}
+        </center>
+        }

@@ -26,6 +26,8 @@ namespace SmoothieCity.Models
         [DataType(DataType.Text)]
         public String PickUpTime { get; set; }
 
+        [Display(Name = "Submitted")]
+        public bool Submitted { get; set; }
         public String CustomerID { get; set; }
 
         //foreign key to customer
