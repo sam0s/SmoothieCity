@@ -17,16 +17,12 @@
 <h1>Item Added</h1>
 
 
-
-<div>
-    <a asp-area="" asp-controller="Smoothies" asp-action="Index">Back to List</a>
-</div>
-
-
 <center>
     @{if (smooth != null)
         {
-            <p>Thank you for adding @smooth.SmoothieName</p>
+            <p>Thank you for adding @smooth.SmoothieName to the cart</p>
+            <a class="btn btn-primary" asp-area="" asp-controller="Smoothies" asp-action="Index">Back to Menu</a>
+            <a class="btn btn-primary" asp-area="" asp-controller="Smoothies" asp-action="Cart">Go to Cart</a>
         }
     }
 

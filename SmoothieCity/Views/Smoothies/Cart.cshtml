@@ -51,6 +51,10 @@
     <h1>Your Cart: </h1>
 
     double? total = 0;
+    double? subtotal = 0;
+    double? percentage = 0.07;
+    double? tax = 0;
+
 
     @foreach (var item in ((List<CartItem>)c_data))
     {
@@ -59,11 +63,15 @@
         String price = String.Format("{0:F2}", (double)item.Smooth.SmoothiePrice);
         if (item.count > 1)
         {
-            total += (item.Smooth.SmoothiePrice * item.count);
+            subtotal += (item.Smooth.SmoothiePrice * item.count);
+            tax += Math.Round((double)(subtotal * percentage), 2);
+            total = (subtotal + tax);
         }
         else
         {
-            total += item.Smooth.SmoothiePrice;
+            subtotal += (item.Smooth.SmoothiePrice);
+            tax += Math.Round((double)(subtotal * percentage), 2);
+            total = (subtotal + tax);
         }
 
         <p>
@@ -78,18 +86,22 @@
 
     <h1> <br> </h1>
     <p>
-        <b>(Total Price: $@total)</b>
+    <p>Subtotal: $@subtotal </p>
+    <p>Tax: $@tax</p>
+    <p>Total Price: $@total</p>
     </p>
 
-
-        <a href="@Url.Action("Finalize", "Smoothies" , new { id = ViewBag.orderId })" title="Add to Cart">Finalize Order</a>
-
-        <div>
-            <a asp-area="" asp-controller="Smoothies" asp-action="Index"> Back to List</a>
-        </div>
+    <p style="text-align:left">Pick-Up Location:</p>
+    <p style="text-align:left">123 Main Street in Spartaburg, SC.</p>
 
 
-        <center>
+    <a class="btn btn-primary" href="@Url.Action("Finalize", "Smoothies" , new { id=ViewBag.orderId })" title="Add to Cart">Finalize Order</a>
 
-        </center>
-        }
+    <div>
+        <a asp-area="" asp-controller="Smoothies" asp-action="Index"> Keep Shopping</a>
+    </div>
+
+    <center>
+
+    </center>
+}
