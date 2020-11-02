@@ -54,6 +54,8 @@
     double? subtotal = 0;
     double? percentage = 0.07;
     double? tax = 0;
+    String totaltax = "";
+    String totalprice = "";
 
 
     @foreach (var item in ((List<CartItem>)c_data))
@@ -65,13 +67,17 @@
         {
             subtotal += (item.Smooth.SmoothiePrice * item.count);
             tax += Math.Round((double)(subtotal * percentage), 2);
+            totaltax = String.Format("{0:F2}", (double)tax);
             total = (subtotal + tax);
+            totalprice = String.Format("{0:F2}", (double)total);
         }
         else
         {
             subtotal += (item.Smooth.SmoothiePrice);
             tax += Math.Round((double)(subtotal * percentage), 2);
+            totaltax = String.Format("{0:F2}", (double)tax);
             total = (subtotal + tax);
+            totalprice = String.Format("{0:F2}", (double)total);
         }
 
         <p>
@@ -87,8 +93,8 @@
     <h1> <br> </h1>
     <p>
     <p>Subtotal: $@subtotal </p>
-    <p>Tax: $@tax</p>
-    <p>Total Price: $@total</p>
+    <p>Tax: $@totaltax</p>
+    <p>Total Price: $@totalprice</p>
     </p>
 
     <p style="text-align:left">Pick-Up Location:</p>
