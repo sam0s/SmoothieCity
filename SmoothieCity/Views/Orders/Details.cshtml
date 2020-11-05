@@ -1,0 +1,61 @@
+﻿@model SmoothieCity.Models.ViewModel;
+
+    <style>
+        .smoothie_img {
+            width: 100px;
+            height: 100px;
+            border-radius: 4px;
+        }
+    </style>
+
+@{
+    ViewData["Title"] = "Details";
+    List<CartItem> c_data = new List<CartItem>();
+    foreach (int i in ViewBag.CartData)
+    {
+        var cur_list = from c in c_data
+                       select c.Smooth.SmoothieId;
+        if (cur_list.Contains(i))
+        {
+            foreach (CartItem ci in c_data)
+            {
+                if (ci.Smooth.SmoothieId == i)
+                {
+                    ci.count++;
+                }
+            }
+            continue;
+        }
+
+        foreach (Smoothies s in Model.Smoothies)
+        {
+            if (s.SmoothieId.Equals(i))
+            {
+                c_data.Add(new CartItem(s, 1));
+                break;
+            }
+        }
+
+    }
+}
+
+<h1>Details</h1>
+
+<div>
+    @foreach (var item in ((List<CartItem>)c_data))
+    {
+        <p style="margin-bottom: 0px;"><b>@item.Smooth.SmoothieName</b></p>
+        String numb = "x" + item.count;
+        String price = String.Format("{0:F2}", (double)item.Smooth.SmoothiePrice);
+       
+
+        <p>
+            <img style="margin-top: 0px" src=~/@item.Smooth.SmoothieImage class=smoothie_img />
+            ($@price)
+            (@numb)
+
+        </p>
+
+
+    }
+</div>

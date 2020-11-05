@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SmoothieCity.Models;
 
 namespace SmoothieCity.Controllers
@@ -14,10 +17,15 @@ namespace SmoothieCity.Controllers
     {
         private readonly SmoothieCityContext _context;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        public OrdersController(SmoothieCityContext context, SignInManager<ApplicationUser> signInManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly String _dbCon;
+
+        public OrdersController(SmoothieCityContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
-            _signInManager = signInManager;
             _context = context;
+            _signInManager = signInManager;
+            _userManager = userManager;
+            _dbCon = configuration.GetConnectionString("DefaultConnection");
         }
 
         // GET: Orders
@@ -34,20 +42,53 @@ namespace SmoothieCity.Controllers
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (_signInManager.IsSignedIn(User) && User.IsInRole("Manager"))
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var order = await _context.Order
-                .Include(o => o.Customer)
-                .FirstOrDefaultAsync(m => m.OrderID == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
+                var order = await _context.Order
+                    .Include(o => o.Customer)
+                    .FirstOrDefaultAsync(m => m.OrderID == id);
+                if (order == null)
+                {
+                    return NotFound();
+                }
+                var uid = order.CustomerID;
+                var oid = order.OrderID;
 
-            return View(order);
+                
+
+                    //try to populate cart
+                    List<int> cartItems = new List<int>();
+                    using (var con = new SqlConnection(_dbCon))
+                    {
+                        con.Open();
+                        SqlCommand test = new SqlCommand("SELECT TOP 500 [dbo].OrderItems.SmoothieID, [dbo].[Order].CustomerID FROM[dbo].OrderItems INNER JOIN[dbo].[Order] ON[dbo].[OrderItems].[OrderID] = [dbo].[Order].[OrderID] WHERE [dbo].[Order].[CustomerID] = '" + uid + "'AND [dbo].[Order].[OrderID] = " + oid, con);
+                        using (SqlDataReader reader = test.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Debug.WriteLine((int)reader[0]);
+                                cartItems.Add((int)reader[0]);
+                            }
+                        }
+                    }
+
+                    ViewBag.CartData = cartItems;
+                
+
+                ViewModel a = new ViewModel()
+                {
+                    Smoothies = await _context.Smoothies.ToListAsync(),
+                    Orders = await _context.Order.ToListAsync()
+                };
+
+                return View(a);
+            }
+            return View("~/Views/RoleManager/AcessDenied.cshtml");
         }
 
         // GET: Orders/Create

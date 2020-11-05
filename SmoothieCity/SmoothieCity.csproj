@@ -13,8 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Migrations\20201102004946_fix.cs" />
-    <Compile Include="Migrations\20201102004946_fix.Designer.cs" />
     <Compile Include="Migrations\SmoothieCityContextModelSnapshot.cs" />
   </ItemGroup>
 

@@ -102,6 +102,13 @@ else
                 <p>$@price</p>
 
 
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Manager"))
+                {
+                    <a class="btn btn-secondary" , asp-action="Edit" asp-route-id="@item.SmoothieId">Edit</a>
+                    <a class="btn btn-secondary" , asp-action="Details" asp-route-id="@item.SmoothieId">Details</a>
+                    <a class="btn btn-secondary" , asp-action="delete" asp-route-id="@item.SmoothieId">Delete</a>
+                }
+
             </div>
         }
     </div>
