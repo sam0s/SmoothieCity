@@ -97,7 +97,7 @@ namespace SmoothieCity.Controllers
                     {
                         Order o = new Order() {
                             CustomerID = usr.Id,
-                            PickUpTime = "default",
+                            PickUpTime = DateTime.Now.AddMinutes(15).ToString(),
                             OrderTime = "default",
                             Submitted = false,
                             SpecialInstructions = "default"
@@ -365,7 +365,7 @@ namespace SmoothieCity.Controllers
                             throw;
                         }
                     }
-                    return RedirectToAction(nameof(Index));
+                    return View("Views/Smoothies/Confirmation.cshtml");
                 }
                 ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerID", order.CustomerID);
                 return View(order);

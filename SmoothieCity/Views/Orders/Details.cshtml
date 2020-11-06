@@ -39,17 +39,17 @@
     }
 }
 
-<h1>Details</h1>
+<h1 class="text-center">Details</h1>
 
-<div>
+<div class="text-center">
     @foreach (var item in ((List<CartItem>)c_data))
     {
-        <p style="margin-bottom: 0px;"><b>@item.Smooth.SmoothieName</b></p>
+        <p class="text-center" style="margin-bottom: 0px;"><b>@item.Smooth.SmoothieName</b></p>
         String numb = "x" + item.count;
         String price = String.Format("{0:F2}", (double)item.Smooth.SmoothiePrice);
        
 
-        <p>
+        <p class="text-center">
             <img style="margin-top: 0px" src=~/@item.Smooth.SmoothieImage class=smoothie_img />
             ($@price)
             (@numb)

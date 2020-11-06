@@ -4,35 +4,38 @@
     ViewData["Title"] = "View";
 }
 
-<h1>View</h1>
+<h1 class="text-center">View</h1>
 
-<h4>Order</h4>
+<h4 class="text-center">Order</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Finalize">
-          
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="mx-auto">
+<div class="row justify-content-center">
+    <div class="col-md-4 text-center">
+        
+        <form asp-action="Finalize" class="mx-auto">
+            <div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
             <input type="hidden" asp-for="OrderID" />
-            <div class="form-group">
-                <p>Special instructions for your order?</p>
-                <input asp-for="SpecialInstructions" class="form-control" />
+            <div class="form-group text-center">
+                <p class="text-center">Special instructions for your order?</p>
+                <input asp-for="SpecialInstructions" class="form-control text-center" />
                 <span asp-validation-for="SpecialInstructions" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <p>What time would you like to pickup your order?</p>
-                <input asp-for="PickUpTime" class="form-control" />
+            <div class="form-group text-center">
+                <p class="text-center">What time would you like to pickup your order?</p>
+                <input asp-for="PickUpTime" class="form-control text-center" />
                 <span asp-validation-for="PickUpTime" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Submit Order!" class="btn btn-primary" />
+            <div class="form-group text-center">
+                <input type="submit" value="Submit Order!" class="btn btn-secondary" />
             </div>
         </form>
+        
     </div>
 </div>
+</div>
 
-<div>
+<div class="text-center">
     <a asp-area="" asp-controller="Smoothies" asp-action="Cart">Back to Cart</a>
 </div>
 

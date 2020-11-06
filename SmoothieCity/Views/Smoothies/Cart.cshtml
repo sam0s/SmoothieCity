@@ -36,7 +36,7 @@
 <style>
     .smoothie_img {
         width: 100px;
-        height: 100px;
+        height: 150px;
         border-radius: 4px;
     }
 </style>
@@ -48,7 +48,7 @@
 @if (SignInManager.IsSignedIn(User))
 {
 
-    <h1>Your Cart: </h1>
+    <h1 class="text-center">Your Cart: </h1>
 
     double? total = 0;
     double? subtotal = 0;
@@ -60,7 +60,7 @@
 
     @foreach (var item in ((List<CartItem>)c_data))
     {
-        <p style="margin-bottom: 0px;"><b>@item.Smooth.SmoothieName</b></p>
+        <p class="text-center" style="margin-bottom: 0px;"><b>@item.Smooth.SmoothieName</b></p>
         String numb = "x" + item.count;
         String price = String.Format("{0:F2}", (double)item.Smooth.SmoothiePrice);
         if (item.count > 1)
@@ -80,7 +80,7 @@
             totalprice = String.Format("{0:F2}", (double)total);
         }
 
-        <p>
+        <p class="text-center">
             <img style="margin-top: 0px" src=~/@item.Smooth.SmoothieImage class=smoothie_img />
             ($@price)
             (@numb)
@@ -90,20 +90,21 @@
 
     }
 
-    <h1> <br> </h1>
+    
     <p>
-    <p>Subtotal: $@subtotal </p>
-    <p>Tax: $@totaltax</p>
-    <p>Total Price: $@totalprice</p>
+    <p class="text-center">Subtotal: $@subtotal </p>
+    <p class="text-center">Tax: $@totaltax</p>
+    <p class="text-center">Total Price: $@totalprice</p>
     </p>
 
-    <p style="text-align:left">Pick-Up Location:</p>
-    <p style="text-align:left">123 Main Street in Spartaburg, SC.</p>
+    <p style="text-align:center">Pick-Up Location:</p>
+    <p style="text-align:center">123 Main Street in Spartaburg, SC.</p>
 
+    <div class="text-center">
+    <a class="btn btn-secondary" href="@Url.Action("Finalize", "Smoothies" , new { id=ViewBag.orderId })" title="Add to Cart">Finalize Order</a>
+    </div>
 
-    <a class="btn btn-primary" href="@Url.Action("Finalize", "Smoothies" , new { id=ViewBag.orderId })" title="Add to Cart">Finalize Order</a>
-
-    <div>
+    <div class="text-center">
         <a asp-area="" asp-controller="Smoothies" asp-action="Index"> Keep Shopping</a>
     </div>
 

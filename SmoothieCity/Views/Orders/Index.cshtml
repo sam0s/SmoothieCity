@@ -4,33 +4,41 @@
     ViewData["Title"] = "Manage Menu";
 }
 
-<center>
-    @foreach (var item in Model)
-    {
-        if (item.Submitted == true)
-        {
+<table class="table-bordered mx-lg-auto">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Submitted</th>
+            <th scope="col">Expected</th>
+        </tr>
+        <tbody class="table table-striped">
+            @foreach (var item in Model)
+            {
+                if (item.Submitted == true)
+                {
 
-    <div>
+                    <tr>
 
-        @{
-            String iname = item.Customer.FirstName + " " + item.Customer.LastName;
-            String isub_time = item.OrderTime;
-            String ipickup_time = item.PickUpTime;
-        }
+                        @{
+                            String iname = item.Customer.FirstName + " " + item.Customer.LastName;
+                            String isub_time = item.OrderTime;
+                            String ipickup_time = item.PickUpTime;
+                        }
 
-        <p>
-            <i>
-                @iname
-                @isub_time
-                @ipickup_time
-            </i>
 
-            <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
-            <a asp-action="Details" asp-route-id="@item.OrderID">View</a>
-        </p>
 
-    </div>
+                        <td> @iname </td>
+                        <td> @isub_time </td>
+                        <td>@ipickup_time</td>
 
-        }
-    }
-</center>
+
+                        <td> <a asp-action="Delete" asp-route-id="@item.OrderID">Complete</a> </td>
+                        <td><a asp-action="Details" asp-route-id="@item.OrderID">View Details</a> </td>
+                    </tr>
+
+
+
+                }
+            }
+        </tbody>
+</table>
