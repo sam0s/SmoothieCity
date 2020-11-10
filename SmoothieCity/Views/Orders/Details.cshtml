@@ -11,6 +11,9 @@
 @{
     ViewData["Title"] = "Details";
     List<CartItem> c_data = new List<CartItem>();
+
+    Order curOrder = (Order)Model.Passable;
+
     foreach (int i in ViewBag.CartData)
     {
         var cur_list = from c in c_data
@@ -27,6 +30,7 @@
             continue;
         }
 
+
         foreach (Smoothies s in Model.Smoothies)
         {
             if (s.SmoothieId.Equals(i))
@@ -42,12 +46,13 @@
 <h1 class="text-center">Details</h1>
 
 <div class="text-center">
+    Special instructions: @curOrder.SpecialInstructions
     @foreach (var item in ((List<CartItem>)c_data))
     {
         <p class="text-center" style="margin-bottom: 0px;"><b>@item.Smooth.SmoothieName</b></p>
         String numb = "x" + item.count;
         String price = String.Format("{0:F2}", (double)item.Smooth.SmoothiePrice);
-       
+
 
         <p class="text-center">
             <img style="margin-top: 0px" src=~/@item.Smooth.SmoothieImage class=smoothie_img />
@@ -59,3 +64,4 @@
 
     }
 </div>
+<a asp-action="Index">Back to List</a>

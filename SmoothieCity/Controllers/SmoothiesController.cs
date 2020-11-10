@@ -30,8 +30,53 @@ namespace SmoothieCity.Controllers
             _dbCon = configuration.GetConnectionString("DefaultConnection");
         }
 
+        public async Task<IActionResult> Remove(int idd)
+        {
+            if (_signInManager.IsSignedIn(User))
+            {
+                //Get user
+                var usr = await _userManager.FindByNameAsync(User.Identity.Name);
 
-        public async Task<IActionResult> Cart()
+                //get order id
+                int oid = -1;
+                using (var con = new SqlConnection(_dbCon))
+                {
+                    con.Open();
+                    SqlCommand test = new SqlCommand("SELECT TOP 2 [OrderID] FROM[dbo].[Order] WHERE CustomerID = '" + usr.Id + "' AND [dbo].[Order].[Submitted] = 0", con);
+                    object result = test.ExecuteScalar();
+                    result = (result == DBNull.Value) ? null : result;
+                    oid = (result == null) ? -1 : Convert.ToInt32(result);
+                }
+
+                using (var con = new SqlConnection(_dbCon))
+                {
+                    con.Open();
+                    //get cart
+                    SqlCommand test = new SqlCommand("SELECT TOP 500 [dbo].OrderItems.SmoothieID, [dbo].[Order].CustomerID FROM[dbo].OrderItems INNER JOIN[dbo].[Order] ON[dbo].[OrderItems].[OrderID] = [dbo].[Order].[OrderID] WHERE [dbo].[Order].[CustomerID] = '" + usr.Id + "'AND [dbo].[Order].[Submitted] = 0", con);
+                    using (SqlDataReader reader = test.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if ((int)reader[0] == idd)
+                            {
+                                //remove from cart
+                                SqlCommand rem = new SqlCommand("DELETE FROM [OrderItems] WHERE OrderID = " + oid + " and SmoothieId =" + idd, con);
+                                rem.ExecuteNonQuery();
+
+                            }
+
+                        }
+                        }
+                    }
+                return RedirectToAction("Cart", "Smoothies");
+
+            }
+
+            return View("~/Views/RoleManager/AcessDenied.cshtml");
+        }
+            
+        
+            public async Task<IActionResult> Cart()
         {
             if (_signInManager.IsSignedIn(User))
             {

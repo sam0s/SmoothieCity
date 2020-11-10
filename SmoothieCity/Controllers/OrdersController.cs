@@ -78,12 +78,13 @@ namespace SmoothieCity.Controllers
                     }
 
                     ViewBag.CartData = cartItems;
-                
+
 
                 ViewModel a = new ViewModel()
                 {
                     Smoothies = await _context.Smoothies.ToListAsync(),
-                    Orders = await _context.Order.ToListAsync()
+                    Orders = await _context.Order.ToListAsync(),
+                    Passable = order
                 };
 
                 return View(a);

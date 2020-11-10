@@ -10,6 +10,8 @@ namespace SmoothieCity.Models
         public IEnumerable<SmoothieCity.Models.Smoothies> Smoothies { get; set; }
 
         public IEnumerable<SmoothieCity.Models.Order> Orders { get; set; }
+
+        public object Passable { get; set; }
     }
 
 }
