@@ -1,5 +1,4 @@
-﻿
-@model SmoothieCity.Models.ViewModel;
+﻿@model SmoothieCity.Models.ViewModel;
 @{
 
     ViewData["Title"] = "Cart";
@@ -44,9 +43,10 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-
 @if (c_data.Count >= 1)
 {
+
+
     @if (SignInManager.IsSignedIn(User))
     {
 
@@ -58,6 +58,7 @@
         double? tax = 0;
         String totaltax = "";
         String totalprice = "";
+        String totalsubtotal = "";
 
 
         @foreach (var item in ((List<CartItem>)c_data))
@@ -68,7 +69,8 @@
             String price = String.Format("{0:F2}", (double)item.Smooth.SmoothiePrice);
             if (item.count > 1)
             {
-                subtotal += Math.Round((double)(item.Smooth.SmoothiePrice * item.count),2);
+                subtotal += (item.Smooth.SmoothiePrice * item.count);
+                totalsubtotal = String.Format("{0:F2}", (double)subtotal);
                 tax += Math.Round((double)(subtotal * percentage), 2);
                 totaltax = String.Format("{0:F2}", (double)tax);
                 total = (subtotal + tax);
@@ -76,7 +78,8 @@
             }
             else
             {
-                subtotal += Math.Round((double)(item.Smooth.SmoothiePrice),2);
+                subtotal += (item.Smooth.SmoothiePrice);
+                totalsubtotal = String.Format("{0:F2}", (double)subtotal);
                 tax += Math.Round((double)(subtotal * percentage), 2);
                 totaltax = String.Format("{0:F2}", (double)tax);
                 total = (subtotal + tax);
@@ -95,12 +98,14 @@
             <p class="text-center">
                 <a href="@Url.Action("Remove", "Smoothies" , new { idd=item.Smooth.SmoothieId })" title="Add to Cart">Remove</a>
             </p>
+
+
+
         }
 
-
         <p class="text-center">
-            <input class="text-center" type="submit" value="Update Cart" />
-        <p class="text-center">Subtotal: $@subtotal </p>
+                    <input class="text-center" type="submit" value="Update Cart" />
+        <p class="text-center">Subtotal: $@totalsubtotal </p>
         <p class="text-center">Tax: $@totaltax</p>
         <p class="text-center">Total Price: $@totalprice</p>
         </p>
@@ -108,23 +113,24 @@
         <p style="text-align:center">Pick-Up Location:</p>
         <p style="text-align:center">123 Main Street in Spartaburg, SC.</p>
 
-        @if (c_data.Count > 0)
+        @if ( c_data.Count>0 )
         {
             <div class="text-center">
 
-                <a class="btn btn-secondary" href="@Url.Action("Finalize", "Smoothies" , new { id=ViewBag.orderId })" title="Add to Cart">Finalize Order</a>
+                <a class="btn btn-secondary" href="@Url.Action("Finalize", "Smoothies", new { id = ViewBag.orderId })" title="Add to Cart">Finalize Order</a>
             </div>
         }
 
-        <div class="text-center">
-            <a asp-area="" asp-controller="Smoothies" asp-action="Index"> Keep Shopping</a>
-        </div>
+            <div class="text-center">
+                <a asp-area="" asp-controller="Smoothies" asp-action="Index"> Keep Shopping</a>
+            </div>
 
-        <center>
+            <center>
 
-        </center>
-    }
+            </center>
+        }
 }
+
 else
 {
     <p>
