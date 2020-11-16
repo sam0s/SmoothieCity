@@ -52,23 +52,9 @@ namespace SmoothieCity.Controllers
                 using (var con = new SqlConnection(_dbCon))
                 {
                     con.Open();
-                    //get cart
-                    SqlCommand test = new SqlCommand("SELECT TOP 500 [dbo].OrderItems.SmoothieID, [dbo].[Order].CustomerID FROM[dbo].OrderItems INNER JOIN[dbo].[Order] ON[dbo].[OrderItems].[OrderID] = [dbo].[Order].[OrderID] WHERE [dbo].[Order].[CustomerID] = '" + usr.Id + "'AND [dbo].[Order].[Submitted] = 0", con);
-                    using (SqlDataReader reader = test.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            if ((int)reader[0] == idd)
-                            {
-                                //remove from cart
-                                SqlCommand rem = new SqlCommand("DELETE FROM [OrderItems] WHERE OrderID = " + oid + " and SmoothieId =" + idd, con);
-                                rem.ExecuteNonQuery();
-
-                            }
-
-                        }
-                        }
-                    }
+                    SqlCommand rem = new SqlCommand("DELETE TOP(1) FROM [OrderItems] WHERE OrderID = " + oid + " and SmoothieId =" + idd, con);
+                    rem.ExecuteNonQuery();
+                }
                 return RedirectToAction("Cart", "Smoothies");
 
             }

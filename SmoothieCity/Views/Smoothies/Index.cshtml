@@ -8,6 +8,9 @@
 
 
 <style>
+    body {
+        background-image: url('https://besthqwallpapers.com/Uploads/14-8-2019/101472/white-brick-wall-texture-white-brick-background-stone-texture-white-bricks.jpg');
+    }
     .smoothie_img {
         width: 300px;
         height: 320px;
@@ -55,6 +58,15 @@
         transition: opacity .2s, visibility .2s;
         border-radius: 8px;
     }
+
+    h1 {
+        color: black;
+        font-size: 56px;
+        font-weight: 999;
+        text-shadow: 4px 4px white;
+        background-color: papayawhip;
+        outline: groove;
+    }
 </style>
 
 @inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> signInManager;
@@ -71,14 +83,14 @@ else
 }
 
 <center>
-    <div>
+    <div >
 
 
         @foreach (var item in Model)
         {
 
 
-            <div style='float:left; padding-bottom:64px;  padding-left:32px; padding-right:32px;'>
+            <div style='background-color: papayawhip; color:black ;outline: groove;float:left; padding-bottom: 64px; padding-left: 32px; padding-right: 32px;'>
 
                 @{
                     String iname = item.SmoothieName;
