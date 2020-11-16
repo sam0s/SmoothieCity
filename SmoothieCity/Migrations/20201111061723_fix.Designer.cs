@@ -10,7 +10,7 @@ using SmoothieCity.Models;
 namespace SmoothieCity.Migrations
 {
     [DbContext(typeof(SmoothieCityContext))]
-    [Migration("20201030121934_fix")]
+    [Migration("20201111061723_fix")]
     partial class fix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -243,6 +243,9 @@ namespace SmoothieCity.Migrations
 
                     b.Property<string>("SpecialInstructions")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Submitted")
+                        .HasColumnType("bit");
 
                     b.HasKey("OrderID");
 

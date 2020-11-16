@@ -45,71 +45,76 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@if (SignInManager.IsSignedIn(User))
+@if (c_data.Count >= 1)
 {
-
-    <h1 class="text-center">Your Cart: </h1>
-
-    double? total = 0;
-    double? subtotal = 0;
-    double? percentage = 0.07;
-    double? tax = 0;
-    String totaltax = "";
-    String totalprice = "";
-
-
-    @foreach (var item in ((List<CartItem>)c_data))
+    @if (SignInManager.IsSignedIn(User))
     {
-        <p class="text-center" style="margin-bottom: 0px;"><b>@item.Smooth.SmoothieName</b></p>
-        String numb = "x" + item.count;
-        String price = String.Format("{0:F2}", (double)item.Smooth.SmoothiePrice);
-        if (item.count > 1)
+
+        <h1 class="text-center">Your Cart: </h1>
+
+        double? total = 0;
+        double? subtotal = 0;
+        double? percentage = 0.07;
+        double? tax = 0;
+        String totaltax = "";
+        String totalprice = "";
+
+
+        @foreach (var item in ((List<CartItem>)c_data))
         {
-            subtotal += (item.Smooth.SmoothiePrice * item.count);
-            tax += Math.Round((double)(subtotal * percentage), 2);
-            totaltax = String.Format("{0:F2}", (double)tax);
-            total = (subtotal + tax);
-            totalprice = String.Format("{0:F2}", (double)total);
+            <p class="text-center" style="margin-bottom: 0px;"><b>@item.Smooth.SmoothieName</b></p>
+            int quant = item.count;
+            String numb = "x" + item.count;
+            String price = String.Format("{0:F2}", (double)item.Smooth.SmoothiePrice);
+            if (item.count > 1)
+            {
+                subtotal += Math.Round((double)(item.Smooth.SmoothiePrice * item.count),2);
+                tax += Math.Round((double)(subtotal * percentage), 2);
+                totaltax = String.Format("{0:F2}", (double)tax);
+                total = (subtotal + tax);
+                totalprice = String.Format("{0:F2}", (double)total);
+            }
+            else
+            {
+                subtotal += Math.Round((double)(item.Smooth.SmoothiePrice),2);
+                tax += Math.Round((double)(subtotal * percentage), 2);
+                totaltax = String.Format("{0:F2}", (double)tax);
+                total = (subtotal + tax);
+                totalprice = String.Format("{0:F2}", (double)total);
+            }
+
+            <p class="text-center">
+                <img style="margin-top: 0px" src=~/@item.Smooth.SmoothieImage class=smoothie_img />
+                <a class="text-center">Quantity </a>
+                <td>
+                    <input type="text" name="quantity" id="quantity" value="@quant" />
+                </td>
+                ($@price)
+                (@numb)
+            </p>
+            <p class="text-center">
+                <a href="@Url.Action("Remove", "Smoothies" , new { idd=item.Smooth.SmoothieId })" title="Add to Cart">Remove</a>
+            </p>
         }
-        else
-        {
-            subtotal += (item.Smooth.SmoothiePrice);
-            tax += Math.Round((double)(subtotal * percentage), 2);
-            totaltax = String.Format("{0:F2}", (double)tax);
-            total = (subtotal + tax);
-            totalprice = String.Format("{0:F2}", (double)total);
-        }
+
 
         <p class="text-center">
-            <img style="margin-top: 0px" src=~/@item.Smooth.SmoothieImage class=smoothie_img />
-            ($@price)
-            (@numb)
-        </p>
-        <p class="text-center">
-            <a href="@Url.Action("Remove", "Smoothies" , new { idd=item.Smooth.SmoothieId })" title="Add to Cart">Remove</a>
+            <input class="text-center" type="submit" value="Update Cart" />
+        <p class="text-center">Subtotal: $@subtotal </p>
+        <p class="text-center">Tax: $@totaltax</p>
+        <p class="text-center">Total Price: $@totalprice</p>
         </p>
 
+        <p style="text-align:center">Pick-Up Location:</p>
+        <p style="text-align:center">123 Main Street in Spartaburg, SC.</p>
 
+        @if (c_data.Count > 0)
+        {
+            <div class="text-center">
 
-    }
-
-
-    <p>
-    <p class="text-center">Subtotal: $@subtotal </p>
-    <p class="text-center">Tax: $@totaltax</p>
-    <p class="text-center">Total Price: $@totalprice</p>
-    </p>
-
-    <p style="text-align:center">Pick-Up Location:</p>
-    <p style="text-align:center">123 Main Street in Spartaburg, SC.</p>
-
-    @if ( c_data.Count>0 )
-    {
-        <div class="text-center">
-
-            <a class="btn btn-secondary" href="@Url.Action("Finalize", "Smoothies", new { id = ViewBag.orderId })" title="Add to Cart">Finalize Order</a>
-        </div>
-    }
+                <a class="btn btn-secondary" href="@Url.Action("Finalize", "Smoothies" , new { id=ViewBag.orderId })" title="Add to Cart">Finalize Order</a>
+            </div>
+        }
 
         <div class="text-center">
             <a asp-area="" asp-controller="Smoothies" asp-action="Index"> Keep Shopping</a>
@@ -119,3 +124,13 @@
 
         </center>
     }
+}
+else
+{
+    <p>
+        <h4 class="text-center">No Items in your Cart! </h4>
+        <div class="text-center">
+            <a class="btn btn-secondary" asp-area="" asp-controller="Smoothies" asp-action="Index"> Go to Menu</a>
+        </div>
+    </p>
+}
