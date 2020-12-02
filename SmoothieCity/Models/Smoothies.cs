@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmoothieCity.Models
 {
@@ -10,6 +11,7 @@ namespace SmoothieCity.Models
         {
             
         }
+
         [Display(Name = "Smoothie ID")]
         public int SmoothieId { get; set; }
 
@@ -20,7 +22,7 @@ namespace SmoothieCity.Models
         public int? SmoothieCalories { get; set; }
 
         [Display(Name = "Total Price")]
-        public double? SmoothiePrice { get; set; }
+        public double SmoothiePrice { get; set; }
 
         [Display(Name = "Image")]
         public string SmoothieImage { get; set; }

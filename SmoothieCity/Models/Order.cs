@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SmoothieCity.Models
 {
+
     public partial class Order
     {
         public Order()
@@ -23,8 +24,9 @@ namespace SmoothieCity.Models
         public String OrderTime { get; set; }
 
         [Display( Name = "Pick-up Time")]
-        [DataType(DataType.Text)]
-        public String PickUpTime { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime PickUpTime { get; set; }
 
         [Display(Name = "Submitted")]
         public bool Submitted { get; set; }

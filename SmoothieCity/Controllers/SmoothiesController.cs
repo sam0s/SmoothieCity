@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.AspNetCore.Http;
+using System.Globalization;
 
 namespace SmoothieCity.Controllers
 {
@@ -129,7 +130,7 @@ namespace SmoothieCity.Controllers
                     {
                         Order o = new Order() {
                             CustomerID = usr.Id,
-                            PickUpTime = DateTime.Now.AddMinutes(15).ToString(),
+                            PickUpTime = DateTime.Now.AddMinutes(15),
                             OrderTime = "default",
                             Submitted = false,
                             SpecialInstructions = "default"
@@ -372,7 +373,17 @@ namespace SmoothieCity.Controllers
                 var usr = await _userManager.FindByNameAsync(User.Identity.Name);
 
                 order.Submitted = true;
-                order.OrderTime = DateTime.Now.ToString();
+                DateTime time = DateTime.Now.ToLocalTime();
+                order.OrderTime = DateTime.Now.ToLocalTime().ToString();
+
+
+                int n = order.PickUpTime.Hour;
+                
+                if (n > 17 || n<7){
+                    ViewBag.errormsg = "Enter valid time, between (7am - 7pm)";
+                    return View();
+                }
+
                 order.CustomerID = usr.Id;
                 if (id != order.OrderID)
                 {
